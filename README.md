@@ -122,3 +122,40 @@ plt.plot(sol_opt.t, y_exact, 'k--', label='Nghiệm chính xác')
 plt.legend()
 plt.grid(True)
 plt.show()
+
+```
+
+---
+
+## 6. Sơ đồ code
+
+```mermaid
+graph TD
+    Start([Bắt đầu]) --> Input[/"Nhập: Phương trình, Biên y_a, Đích y_b, z0, z1, tol"/]
+    
+    Input --> InitF["Tính sai số F_z0 và F_z1 bằng thuật toán RK4"]
+    InitF --> LoopStart((Vòng lặp Secant))
+    
+    LoopStart --> CalcZ2["Tính góc ngắm mới: z2 = z1 - F_z1 * (z1 - z0) / (F_z1 - F_z0)"]
+    
+    CalcZ2 --> RunRK4["Dùng RK4 bắn đạn với góc z2 để tìm điểm rơi y_end"]
+    RunRK4 --> CalcF2["Tính sai số: F_z2 = y_end - y_b"]
+    
+    CalcF2 --> Check{"|F_z2| < tol ?"}
+    
+    Check -- "SAI (Đạn trượt)" --> Update["Cập nhật: z0 = z1, z1 = z2"]
+    Update --> LoopStart
+    
+    Check -- "ĐÚNG (Trúng đích)" --> Found["Chốt góc bắn tối ưu: z_opt = z2"]
+    
+    Found --> FinalRun["Chạy RK4 lần cuối với z_opt để lưu quỹ đạo"]
+    FinalRun --> Output[/"In góc z_opt và Vẽ đồ thị"/]
+    
+    Output --> End([Kết thúc])
+
+    %% Định dạng màu sắc (tùy chọn để sơ đồ đẹp hơn)
+    style Start fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:#fff
+    style End fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+    style Check fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:#fff
+    style LoopStart fill:#3498db,stroke:#2980b9,color:#fff
+```
