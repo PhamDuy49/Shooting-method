@@ -4,7 +4,7 @@
 
 Dự án này cung cấp một bộ công cụ tự viết hoàn toàn bằng Python (không phụ thuộc vào thư viện bên ngoài như `scipy`) để giải **Bài toán điều kiện biên hai điểm (Boundary Value Problem - BVP)** bằng **Phương pháp bắn (Shooting Method)**. 
 
-Thay vì sử dụng các thuật toán "hộp đen" có sẵn, dự án này minh bạch hóa toàn bộ quá trình toán học bên dưới bằng cách tự xây dựng:
+Thay vì sử dụng các thuật toán có sẵn, dự án này minh bạch hóa toàn bộ quá trình toán học bên dưới bằng cách tự xây dựng:
 * Thuật toán **Runge-Kutta bậc 4 (RK4)** để giải phương trình vi phân.
 * Thuật toán **Cát tuyến (Secant Method)** để dò tìm góc bắn tối ưu.
 
